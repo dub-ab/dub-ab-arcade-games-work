@@ -1,2 +1,2 @@
-print("Hello there")
-print("But in addition to that, \r\nIt was a dark and stormy night.")
+print("It was a dark and stormy night.")
+print("Suddenly a shot rang out!")
