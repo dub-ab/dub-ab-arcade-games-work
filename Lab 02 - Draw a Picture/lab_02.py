@@ -1,11 +1,17 @@
 """
 This is a sample program to show how to draw using the Python programming
 language and the Arcade library.
+
+Copyright/Attribution Notice: 
+Credit "Kenney.nl" or "www.kenney.nl"
 """
 
 # Import the "arcade" library
 import arcade
 
+
+SPOT_SIZE = 3.5
+SHADOW_DEPTH = 5
 # Open up a window.
 # From the "arcade" library, use a function called "open_window"
 # Set the window title to "Drawing Example"
@@ -18,43 +24,74 @@ arcade.set_background_color(arcade.color.DARK_IMPERIAL_BLUE)
 # Get ready to draw
 arcade.start_render()
 
-# Draw a circles outline centered at (140, 550) and (460, 550) 
-# with a radius of 18 and a line width of 3.
-arcade.draw_circle_outline(70, 550, 30, arcade.color.OLD_SILVER, 3)
-arcade.draw_circle_outline(530, 550, 30, arcade.color.OLD_SILVER, 3)
+# draw home and visitor highlight color
+arcade.draw_xywh_rectangle_filled(70, 500, 230, 50, arcade.color.BRICK_RED)
+arcade.draw_xywh_rectangle_filled(300, 500, 230, 50, arcade.color.OCEAN_BOAT_BLUE)
 
-arcade.draw_line(70, 576, 530, 576, arcade.color.OLD_SILVER, 3)
-arcade.draw_line(70, 525, 530, 525, arcade.color.OLD_SILVER, 3)
+# Draw home / visitor highlighting outlines
+# arcade.draw_line(70, 550, 530, 550, arcade.color.OLD_SILVER, 3)
+# arcade.draw_line(70, 500, 530, 500, arcade.color.OLD_SILVER, 3)
+# arcade.draw_line(70, 496, 530, 496, arcade.color.ONYX, SHADOW_DEPTH) # Teams shadow
+# arcade.draw_arc_outline(530, 525, )
 
+# Draw text 
+arcade.draw_text("Home", 130, 515, arcade.color.WHITE_SMOKE, 20)
+arcade.draw_text("Visitor", 410, 515, arcade.color.WHITE_SMOKE, 20)
 
-# draw rectangle highlighting home and visistor
-arcade.draw_circle_filled(70, 550, 29, arcade.color.BRICK_RED)
-arcade.draw_xywh_rectangle_filled(70, 525, 230, 50, arcade.color.BRICK_RED)
-arcade.draw_xywh_rectangle_filled(300, 525, 230, 50, arcade.color.OCEAN_BOAT_BLUE)
+#arcade.draw_line(200, 500, 250, 500, arcade.color.OLD_SILVER, 3)
+#arcade.draw_line(350, 500, 400, 500, arcade.color.OLD_SILVER, 3)
+arcade.draw_rectangle_filled((200, 500, 555, 495, arcade.color.OLD_SILVER))
+arcade.draw_polygon_filled(((200, 555), (400, 555), (350, 495), (250, 495)), arcade.color.OLD_SILVER)
+arcade.draw_text("V", 275, 515, arcade.color.WHITE_SMOKE, 24)
+arcade.draw_text("S", 305, 515, arcade.color.WHITE_SMOKE, 24)
 
-# Draw text starting at (10, 450) with a size of 20 points.
-arcade.draw_text("Home", 130, 540, arcade.color.WHITE_SMOKE, 20)
-arcade.draw_text("Visitor", 420, 540, arcade.color.WHITE_SMOKE, 20)
+# Draw team logo
+red_logo = arcade.load_texture("c:\\VSCode\\dub-ab-arcade-games-work\\Lab 02 - Draw a Picture\\images\\red-parrot.png")
+blue_logo = arcade.load_texture("c:\\VSCode\\dub-ab-arcade-games-work\\Lab 02 - Draw a Picture\\images\\blue-hippo.png")
+scale = .25
+arcade.draw_texture_rectangle(70, 525, scale * red_logo.width, scale * red_logo.height, red_logo, 45)
+arcade.draw_texture_rectangle(530, 525, scale * blue_logo.width, scale * blue_logo.height, blue_logo, 315)
 
 # Draw pitch
-point_list = ((100, 200), (500, 200), (575, 50), (25, 50))
+point_list = ((90, 200), (510, 200), (580, 50), (15, 50))
 arcade.draw_polygon_filled(point_list, (45, 133, 15))
-arcade.draw_rectangle_filled(300,47, 550, 5, arcade.color.MEDIUM_JUNGLE_GREEN)
+arcade.draw_line(15,47, 580, 47, arcade.color.MEDIUM_JUNGLE_GREEN, SHADOW_DEPTH) # pitch shadow
 
 # Draw pitch decoration 
-# draw grass contrast
+# Draw grass contrast
 arcade.draw_polygon_filled(((300, 60), (300, 190), (270, 190), (255, 60)), (91, 164, 51))
 arcade.draw_polygon_filled(((210, 60), (235, 190), (205, 190), (165, 60)), (91, 164, 51))
 arcade.draw_polygon_filled(((125, 60), (175, 190), (145, 190), (85, 60)), (91, 164, 51))
+arcade.draw_polygon_filled(((345, 60), (330, 190), (360, 190), (390, 60)), (91, 164, 51))
+arcade.draw_polygon_filled(((430, 60), (390, 190), (420, 190), (470, 60)), (91, 164, 51))
+arcade.draw_polygon_filled(((515, 60), (460, 190), (490, 190), (545, 60)), (91, 164, 51))
 
+# Draw pitch lines
+arcade.draw_point(300, 125, arcade.color.WHITE_SMOKE, SPOT_SIZE) # center spot
+arcade.draw_ellipse_outline(300, 125, 24, 18, arcade.color.WHITE_SMOKE, 2) # center circle
 
-
-# draw pitch stripes
 arcade.draw_line(45, 60, 545, 60, arcade.color.WHITE_SMOKE, 2) # bottom sideline
 arcade.draw_line(110, 190, 490, 190, arcade.color.WHITE_SMOKE, 2) # top sideline
 arcade.draw_line(45, 60, 110, 190, arcade.color.WHITE_SMOKE, 2) # left end zone
 arcade.draw_line(490, 190, 545, 60, arcade.color.WHITE_SMOKE, 2) # right end zone
 arcade.draw_line(300, 60, 300, 190, arcade.color.WHITE_SMOKE, 2) # center line
+
+arcade.draw_polygon_outline(((59, 85), (100, 170), (165, 170), (130, 85)), arcade.color.WHITE_SMOKE, 2) # Home penalty box
+# Home goal box
+arcade.draw_point(130, 125, arcade.color.WHITE_SMOKE, SPOT_SIZE) # Home Penalty spot
+arcade.draw_arc_outline(145, 125, 20, 13, arcade.color.WHITE_SMOKE, 0, 70, 2) # Home Penalty arch (upper portion)
+arcade.draw_arc_outline(145, 125, 20, 13, arcade.color.WHITE_SMOKE, 260, 360, 2) # Home Penalty arc (lower portion)
+arcade.draw_arc_outline(145, 125, 20, 13, arcade.color.WHITE_SMOKE, 0, 70, 2)
+arcade.draw_polygon_outline(((460, 85), (430, 170), (499, 170), (534, 85)), arcade.color.WHITE_SMOKE, 2) # Visitor penalty box
+# Visitor Goal Box
+arcade.draw_point(465, 125, arcade.color.WHITE_SMOKE, SPOT_SIZE) # Visitor Penalty spot
+#arcade.draw_arc_outline(150, 81, 15, 36, arcade.color.BRIGHT_MAROON, 90, 360)# Visitor Penalty arc
+
+# Draw corner arcs
+arcade.draw_arc_outline(45, 60, 20, 10, arcade.color.WHITE_SMOKE, 0, 75, 2) # lower left corner 
+arcade.draw_arc_outline(110, 190, 10, 10, arcade.color.WHITE_SMOKE, 245, 360, 2) # upper left corner 
+arcade.draw_arc_outline(490, 190, 10, 10, arcade.color.WHITE_SMOKE, 180, 300, 2) # upper right corner 
+arcade.draw_arc_outline(545, 60, 20, 10, arcade.color.WHITE_SMOKE, 100, 180, 2) # lower right corner 
 
 # Finish drawing
 arcade.finish_render()
