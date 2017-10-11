@@ -28,20 +28,14 @@ arcade.start_render()
 arcade.draw_xywh_rectangle_filled(70, 500, 230, 50, arcade.color.BRICK_RED)
 arcade.draw_xywh_rectangle_filled(300, 500, 230, 50, arcade.color.OCEAN_BOAT_BLUE)
 
-# Draw home / visitor highlighting outlines
-# arcade.draw_line(70, 550, 530, 550, arcade.color.OLD_SILVER, 3)
-# arcade.draw_line(70, 500, 530, 500, arcade.color.OLD_SILVER, 3)
-# arcade.draw_line(70, 496, 530, 496, arcade.color.ONYX, SHADOW_DEPTH) # Teams shadow
-# arcade.draw_arc_outline(530, 525, )
+arcade.draw_polygon_filled(((200, 550), (400, 550), (350, 500), (250, 500)), arcade.color.OLD_SILVER)
+arcade.draw_line(70, 498, 250, 498, arcade.color.PRUNE, SHADOW_DEPTH)
+arcade.draw_line(250, 498, 349, 498, arcade.color.ONYX, SHADOW_DEPTH) 
+arcade.draw_line(349, 498, 530, 498, arcade.color.PRUSSIAN_BLUE, SHADOW_DEPTH) 
 
 # Draw text 
 arcade.draw_text("Home", 130, 515, arcade.color.WHITE_SMOKE, 20)
 arcade.draw_text("Visitor", 410, 515, arcade.color.WHITE_SMOKE, 20)
-
-#arcade.draw_line(200, 500, 250, 500, arcade.color.OLD_SILVER, 3)
-#arcade.draw_line(350, 500, 400, 500, arcade.color.OLD_SILVER, 3)
-arcade.draw_rectangle_filled((200, 500, 555, 495, arcade.color.OLD_SILVER))
-arcade.draw_polygon_filled(((200, 555), (400, 555), (350, 495), (250, 495)), arcade.color.OLD_SILVER)
 arcade.draw_text("V", 275, 515, arcade.color.WHITE_SMOKE, 24)
 arcade.draw_text("S", 305, 515, arcade.color.WHITE_SMOKE, 24)
 
@@ -92,6 +86,18 @@ arcade.draw_arc_outline(45, 60, 20, 10, arcade.color.WHITE_SMOKE, 0, 75, 2) # lo
 arcade.draw_arc_outline(110, 190, 10, 10, arcade.color.WHITE_SMOKE, 245, 360, 2) # upper left corner 
 arcade.draw_arc_outline(490, 190, 10, 10, arcade.color.WHITE_SMOKE, 180, 300, 2) # upper right corner 
 arcade.draw_arc_outline(545, 60, 20, 10, arcade.color.WHITE_SMOKE, 100, 180, 2) # lower right corner 
+
+# Draw Scoreboard
+arcade.draw_line(100, 250, 500, 250, arcade.color.POWDER_BLUE, 2)
+arcade.draw_arc_outline(500, 300, 50, 50, arcade.color.POWDER_BLUE, 270, 360, 2) 
+arcade.draw_line(550, 300, 550, 425, arcade.color.POWDER_BLUE, 2)
+arcade.draw_arc_outline(500, 425, 50, 50, arcade.color.POWDER_BLUE, 0, 90, 2)
+arcade.draw_line(500, 475, 100, 475, arcade.color.POWDER_BLUE, 2)
+arcade.draw_arc_outline(100, 425, 50, 50, arcade.color.POWDER_BLUE, 90, 180, 2) 
+arcade.draw_line(50, 425, 50, 300, arcade.color.POWDER_BLUE, 2)
+arcade.draw_arc_outline(100, 300, 50, 50, arcade.color.POWDER_BLUE, 180, 270, 2) 
+arcade.draw_line(100, 250, 500, 250, arcade.color.POWDER_BLUE, 2)
+
 
 # Finish drawing
 arcade.finish_render()
