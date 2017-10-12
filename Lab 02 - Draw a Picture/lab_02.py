@@ -33,11 +33,13 @@ arcade.draw_line(70, 498, 250, 498, arcade.color.PRUNE, SHADOW_DEPTH)
 arcade.draw_line(250, 498, 349, 498, arcade.color.ONYX, SHADOW_DEPTH) 
 arcade.draw_line(349, 498, 530, 498, arcade.color.PRUSSIAN_BLUE, SHADOW_DEPTH) 
 
-# Draw text 
-arcade.draw_text("Home", 130, 515, arcade.color.WHITE_SMOKE, 20)
-arcade.draw_text("Visitor", 410, 515, arcade.color.WHITE_SMOKE, 20)
-arcade.draw_text("V", 275, 515, arcade.color.WHITE_SMOKE, 24)
-arcade.draw_text("S", 305, 515, arcade.color.WHITE_SMOKE, 24)
+# Draw text 48, 2000, '', ('Calibri', 'Arial'),  True)
+arcade.draw_text("Home", 130, 515, arcade.color.WHITE_SMOKE, 20, 2, '', ('Calibri', 'Arial'), True)
+arcade.draw_text("Visitor", 410, 515, arcade.color.WHITE_SMOKE, 20, 2000, '', ('Calibri', 'Arial'), True)
+arcade.draw_text("vs", 276, 515, arcade.color.WHITE_SMOKE, 36, 2000, '', ('Calibri', 'Arial'), True)
+arcade.draw_line(300, 550, 300, 500, (255,255,255), 1)
+# arcade.draw_text("V", 275, 515, arcade.color.WHITE_SMOKE, 24)
+# arcade.draw_text("S", 305, 515, arcade.color.WHITE_SMOKE, 24)
 
 # Draw team logo
 red_logo = arcade.load_texture("c:\\VSCode\\dub-ab-arcade-games-work\\Lab 02 - Draw a Picture\\images\\red-parrot.png")
@@ -98,6 +100,24 @@ arcade.draw_line(50, 425, 50, 300, arcade.color.POWDER_BLUE, 2)
 arcade.draw_arc_outline(100, 300, 50, 50, arcade.color.POWDER_BLUE, 180, 270, 2) 
 arcade.draw_line(100, 250, 500, 250, arcade.color.POWDER_BLUE, 2)
 
+# Draw home score
+#arcade.draw_xywh_rectangle_outline(150, 350, 100, (100 + SHADOW_DEPTH), arcade.color.POWDER_BLUE, 2)
+score_frame_point_list = (
+    (150, 350),
+    (250, 350),
+    (250, 450),
+    (150, 450),
+    (150, 350)
+)
+
+
+arcade.draw_polygon_outline(score_frame_point_list, arcade.color.POWDER_BLUE, 2)
+arcade.draw_text("3", 185, 380, arcade.color.WHITE_SMOKE, 48, 2000, '', ('Calibri', 'Arial'),  True)
+
+
+# Draw visitor score
+arcade.draw_xywh_rectangle_outline(370, 350, 100, (100 + SHADOW_DEPTH), arcade.color.POWDER_BLUE, 2)
+arcade.draw_text("2", 405, 380, arcade.color.WHITE_SMOKE, 48, 2000, '', ('Calibri', 'Arial'),  True)
 
 # Finish drawing
 arcade.finish_render()
