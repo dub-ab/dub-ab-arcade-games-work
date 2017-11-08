@@ -1,6 +1,11 @@
 """
+As Seen At: Teaching Python 3.6 with Games
+http://arcade-book.readthedocs.io/en/latest/
+
 This is a sample program to show how to draw using the Python programming
 language and the Arcade library.
+
+
 
 Copyright/Attribution Notice: 
 Credit "Kenney.nl" or "www.kenney.nl"
@@ -37,9 +42,7 @@ arcade.draw_line(349, 498, 530, 498, arcade.color.PRUSSIAN_BLUE, SHADOW_DEPTH)
 arcade.draw_text("Home", 130, 515, arcade.color.WHITE_SMOKE, 20, 2, '', ('Calibri', 'Arial'), True)
 arcade.draw_text("Visitor", 410, 515, arcade.color.WHITE_SMOKE, 20, 2000, '', ('Calibri', 'Arial'), True)
 arcade.draw_text("vs", 276, 515, arcade.color.WHITE_SMOKE, 36, 2000, '', ('Calibri', 'Arial'), True)
-arcade.draw_line(300, 550, 300, 500, (255,255,255), 1)
-# arcade.draw_text("V", 275, 515, arcade.color.WHITE_SMOKE, 24)
-# arcade.draw_text("S", 305, 515, arcade.color.WHITE_SMOKE, 24)
+#arcade.draw_line(300, 550, 300, 500, (255,255,255), 1) # reference line
 
 # Draw team logo
 red_logo = arcade.load_texture("c:\\VSCode\\dub-ab-arcade-games-work\\Lab 02 - Draw a Picture\\images\\red-parrot.png")
@@ -89,35 +92,63 @@ arcade.draw_arc_outline(110, 190, 10, 10, arcade.color.WHITE_SMOKE, 245, 360, 2)
 arcade.draw_arc_outline(490, 190, 10, 10, arcade.color.WHITE_SMOKE, 180, 300, 2) # upper right corner 
 arcade.draw_arc_outline(545, 60, 20, 10, arcade.color.WHITE_SMOKE, 100, 180, 2) # lower right corner 
 
+def draw_xyhw_rectangle_rounded_corners(left, top, width, height, radius, color, border):
+    """
+    Draw a rectangle with rounded corners by specifying left, \
+    and top edge locations, width, height and radius.
+    
+    Where:
+        :``left``: is the left_side (float), 
+        :``top``: is the top_side: (float), 
+        :``width``: is the width: (float), 
+        :``height``: is the height: (float), 
+        :``radius``: is the radius: (float), 
+        :``color``: is the color: typing.Union[typing.Tuple[int, int, int], \
+        typing.List[int], typing.Tuple[int, int, int, int]], 
+        :``border``: is the border_width: (float = 1)
+    Returns:
+        None
+    Raises:
+        None
+    """
+    arcade.draw_line( (left + radius),            top, ((left + width) - radius),                       top, color, border)  # top 
+    arcade.draw_line( (left + radius), (top - height), ((left + width) - radius),            (top - height), color, border)  # bottom   
+    arcade.draw_line(            left, (top - radius),                      left, ((top - height) + radius), color, border)  # left side    
+    arcade.draw_line(  (left + width), (top - radius),            (left + width), ((top - height) + radius), color, border)  # right side 
+
+    arcade.draw_arc_outline( ((left + width) - radius),            (top - radius),  radius,  radius, color,   0,  90, border)  # upper right corner
+    arcade.draw_arc_outline(           (left + radius),            (top - radius),  radius,  radius, color,  90, 180, border)  # upper left corner
+    arcade.draw_arc_outline(           (left + radius), ((top - height) + radius),  radius,  radius, color, 180, 270, border)  # lower left corner
+    arcade.draw_arc_outline( ((left + width) - radius), ((top - height) + radius),  radius,  radius, color, 270, 360, border)  # lower right corner
+
 # Draw Scoreboard
-arcade.draw_line(100, 250, 500, 250, arcade.color.POWDER_BLUE, 2)
-arcade.draw_arc_outline(500, 300, 50, 50, arcade.color.POWDER_BLUE, 270, 360, 2) 
-arcade.draw_line(550, 300, 550, 425, arcade.color.POWDER_BLUE, 2)
-arcade.draw_arc_outline(500, 425, 50, 50, arcade.color.POWDER_BLUE, 0, 90, 2)
-arcade.draw_line(500, 475, 100, 475, arcade.color.POWDER_BLUE, 2)
-arcade.draw_arc_outline(100, 425, 50, 50, arcade.color.POWDER_BLUE, 90, 180, 2) 
-arcade.draw_line(50, 425, 50, 300, arcade.color.POWDER_BLUE, 2)
-arcade.draw_arc_outline(100, 300, 50, 50, arcade.color.POWDER_BLUE, 180, 270, 2) 
-arcade.draw_line(100, 250, 500, 250, arcade.color.POWDER_BLUE, 2)
+# arcade.draw_line(       100, 325, 500, 325, arcade.color.ARYLIDE_YELLOW, 5)            # bottom
+# arcade.draw_arc_outline(500, 325,  50,  50, arcade.color.ARYLIDE_YELLOW, 270, 360, 5)  # lower right corner
+# arcade.draw_line(       550, 320, 550, 355, arcade.color.ARYLIDE_YELLOW, 5)            # visitor side
+# arcade.draw_arc_outline(500, 375,  50,  50, arcade.color.ARYLIDE_YELLOW, 0, 90, 5)     # upper right corner
+# arcade.draw_line(       500, 425, 100, 425, arcade.color.ARYLIDE_YELLOW, 5)            # top
+# arcade.draw_arc_outline(100, 375,  50,  50, arcade.color.ARYLIDE_YELLOW, 90, 180, 5)   # upper left corner
+# arcade.draw_line(        50, 375,  50, 325, arcade.color.ARYLIDE_YELLOW, 5)            # home side
+# arcade.draw_arc_outline(100, 325,  50,  50, arcade.color.ARYLIDE_YELLOW, 180, 270, 5)  # lower left corner
+draw_xyhw_rectangle_rounded_corners(50, 485, 500, 100, 50, arcade.color.ARYLIDE_YELLOW, 5)
 
-# Draw home score
-#arcade.draw_xywh_rectangle_outline(150, 350, 100, (100 + SHADOW_DEPTH), arcade.color.POWDER_BLUE, 2)
-score_frame_point_list = (
-    (150, 350),
-    (250, 350),
-    (250, 450),
-    (150, 450),
-    (150, 350)
-)
-
-
-arcade.draw_polygon_outline(score_frame_point_list, arcade.color.POWDER_BLUE, 2)
-arcade.draw_text("3", 185, 380, arcade.color.WHITE_SMOKE, 48, 2000, '', ('Calibri', 'Arial'),  True)
-
+# Draw home score 
+home_score_frame = ((165, 400), (235, 400), (235, 470), (165, 470)) # a 70 x 70 box
+arcade.draw_polygon_filled(home_score_frame, arcade.color.OLD_SILVER)
+home_score_frame_shadow = ((165, 400), (235, 400), (235, 405), (170, 405))
+arcade.draw_polygon_filled(home_score_frame_shadow, arcade.color.ONYX)
+arcade.draw_line(235, 400, 235, 470, arcade.color.ONYX, SHADOW_DEPTH)
+arcade.draw_text('3', 185, 415, arcade.color.WHITE_SMOKE, 48, 2000, '', ('Calibri', 'Arial'), True)
 
 # Draw visitor score
-arcade.draw_xywh_rectangle_outline(370, 350, 100, (100 + SHADOW_DEPTH), arcade.color.POWDER_BLUE, 2)
-arcade.draw_text("2", 405, 380, arcade.color.WHITE_SMOKE, 48, 2000, '', ('Calibri', 'Arial'),  True)
+visitor_score_frame = ((370, 400), (440, 400), (440, 470), (370, 470))
+arcade.draw_polygon_filled(visitor_score_frame, arcade.color.OLD_SILVER, )
+visitor_score_frame_shadow = ((370, 400), (440, 400), (440, 405), (375, 405))
+arcade.draw_polygon_filled(visitor_score_frame_shadow, arcade.color.ONYX)
+arcade.draw_line(440, 400, 440, 470, arcade.color.ONYX, SHADOW_DEPTH)
+arcade.draw_text("2", 390, 415, arcade.color.WHITE_SMOKE, 48, 2000, '', ('Calibri', 'Arial'),  True)
+
+
 
 # Finish drawing
 arcade.finish_render()
