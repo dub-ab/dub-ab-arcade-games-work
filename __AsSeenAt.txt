@@ -1,0 +1,2 @@
+http://arcade-book.readthedocs.io/en/latest/
+http://arcade.academy/index.html
