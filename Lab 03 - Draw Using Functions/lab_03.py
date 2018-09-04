@@ -5,6 +5,11 @@ This is a sample program to show how to draw using functions
 import arcade
 import random
 
+# --- Set up the constants
+
+# Size of the screen
+SCREEN_WIDTH = 600
+SCREEN_HEIGHT = 600
 SHADOW_DEPTH = 5
 SPOT_SIZE = 3.5
 FACE = [
@@ -179,7 +184,7 @@ def draw_stands(quantity_of_people):
     Draw the stands
 
     Where:
-        ``quantity_of_people`` is the number of people to draw (int) \
+        ``quantity_of_people`` is the number of people to draw (int)
     Returns:
         None
     Raises:
@@ -189,6 +194,9 @@ def draw_stands(quantity_of_people):
     arcade.draw_line(145, 350, 455, 350, arcade.color.BLACK, 2) # back stand wall
     arcade.draw_line(455, 350, 510, 220, arcade.color.BLACK, 2) # right stand wall    
     
+    crowd = arcade.load_texture("c:\\VSCode\\dub-ab-arcade-games-work\\Lab 03 - Draw Using Functions\\images\\Stadium.png")
+    arcade.draw_texture_rectangle(300, 275, crowd.width, crowd.height, crowd, 0)    
+    
     for q in range(quantity_of_people):
 
         x_location = random.randint(50, 550)
@@ -196,36 +204,62 @@ def draw_stands(quantity_of_people):
 
         draw_person(x_location, y_location)
 
+
+
     arcade.draw_triangle_filled( 40, 100,  40, 355, 145, 355, arcade.color.DARK_IMPERIAL_BLUE)
     arcade.draw_triangle_filled(560, 100, 560, 355, 455, 355, arcade.color.DARK_IMPERIAL_BLUE)
-    arcade.draw_rectangle_filled(300, 211, 420, 20, arcade.color.OLD_SILVER, 0)
+    arcade.draw_rectangle_filled(300, 211, 428, 20, arcade.color.OLD_SILVER, 0)
 
-
-def main():
-    """ 
-    This is the main function that we call to run the program.
+def draw_word_goal(position_x, position_y, font_size):
     """
-    
-    # Open up a window.
-    # From the "arcade" library, use a function called "open_window"
-    # Set the and dimensions (width and height)
-    arcade.open_window(600, 600, "Drawing Example - Scoreboard with Functions")
+    Draw text starting at the positions given (i.e.: 10, 450) 
+    with the font size given.
+    """
+    bump = 0
+    arcade.draw_text("GOAL !!!", position_x, position_y + bump, arcade.color.BLACK, font_size)
+    bump += 0
+    arcade.draw_text("GOAL !!!", position_x + 2, position_y + bump, arcade.color.WHITE_SMOKE, font_size  )
+    bump += 0
+    arcade.draw_text("GOAL !!!", position_x + 3, position_y + bump, arcade.color.GOLDEN_POPPY, font_size )
 
-    # set the background color 
-    arcade.set_background_color(arcade.color.DARK_IMPERIAL_BLUE)
-    # Get ready to draw
+def on_draw(delta_time):
+    """
+    Use this function to draw everything to the screen.
+    This function will be called over and over because of the "schedule"
+    command below.
+    """
     arcade.start_render()
-
+    draw_stands(225)
     draw_team_marque()
     draw_pitch()
-    draw_xyhw_rectangle_rounded_corners(50, 485, 500, 100, 50, arcade.color.ARYLIDE_YELLOW, 5)
+    draw_xyhw_rectangle_rounded_corners(50, 485, 500, 100, 50, arcade.color.GOLDEN_POPPY, 5)
     draw_home_score("3")
     draw_visitor_score("2")
-    draw_stands(7000)
+    #draw_word_goal(on_draw.center_x, on_draw.center_y, on_draw.font_size)
 
-    arcade.finish_render()
+    # Modify the word's position and size
+    on_draw.center_x -= 6
+    on_draw.center_y -= 0
+    on_draw.font_size += 6
+
+on_draw.center_x = 300      # Initial x position
+on_draw.center_y = 435      # Initial y position
+on_draw.font_size = 6       # Initial font size
+
+def main():
+    # Open up our window
+    arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing Example - Scoreboard with Functions")
+    arcade.set_background_color(arcade.color.DARK_IMPERIAL_BLUE)
+
+    # The "schedule" command
+    # Tell the computer to call the draw command 80 times per second
+ 
+    
+
+    arcade.schedule(on_draw, 1 / 80)
+
+    # Run the program
     arcade.run()
 
-# Call the main function to get the program started.
 if __name__ == "__main__":
-    main()
+    main() 
